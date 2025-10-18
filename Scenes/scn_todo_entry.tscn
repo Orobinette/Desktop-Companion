@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqeavjas4bvyu"]
+
+[ext_resource type="Script" path="res://Scripts/TodoEntry.gd" id="1_7xkwc"]
+
+[node name="Todo entry" type="HBoxContainer" node_paths=PackedStringArray("check", "text_box", "delete")]
+script = ExtResource("1_7xkwc")
+check = NodePath("Check Box")
+text_box = NodePath("Text")
+delete = NodePath("Delete Button")
+
+[node name="Check Box" type="CheckBox" parent="."]
+layout_mode = 2
+
+[node name="Text" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "(text)"
+fit_content = true
+scroll_active = false
+scroll_following = true
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Delete Button" type="Button" parent="."]
+layout_mode = 2
+text = "delete"
+
+[connection signal="toggled" from="Check Box" to="." method="_on_check_pressed"]
+[connection signal="pressed" from="Delete Button" to="." method="_on_delete_button_pressed"]

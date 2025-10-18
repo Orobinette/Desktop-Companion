@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://6dvvhrh03yhm"]
+
+[ext_resource type="Script" path="res://Scripts/Todo.gd" id="1_ijbd2"]
+
+[node name="Todo" type="Control" node_paths=PackedStringArray("text_input", "entry_container")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ijbd2")
+text_input = NodePath("Text Input")
+entry_container = NodePath("Entry Container")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Todo"
+
+[node name="Text Input" type="TextEdit" parent="."]
+layout_mode = 2
+offset_top = 33.0
+offset_right = 100.0
+offset_bottom = 73.0
+size_flags_horizontal = 8
+placeholder_text = "-"
+scroll_smooth = true
+
+[node name="Add Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 110.0
+offset_top = 33.0
+offset_right = 148.0
+offset_bottom = 73.0
+text = "add"
+
+[node name="Entry Container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 85.0
+offset_right = 40.0
+offset_bottom = 125.0
+
+[connection signal="pressed" from="Add Button" to="." method="_on_add_button_pressed"]
