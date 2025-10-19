@@ -19,7 +19,6 @@ bbcode_enabled = true
 text = "(text)"
 fit_content = true
 scroll_active = false
-scroll_following = true
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 

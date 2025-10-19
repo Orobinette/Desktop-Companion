@@ -1,0 +1,69 @@
+extends Control
+
+@export var start: Button
+@export var skip: Button
+@export var timer: RichTextLabel
+
+var timer_active: bool = false
+var time: float = 0
+
+var work_time: int = 5
+var break_time: int = 10
+@onready var mode = modes.WORK
+enum modes {WORK, BREAK}
+
+func _ready():
+	time = work_time
+	update_timer()
+
+func update_timer():
+	var hour = int(time/60/60)
+	var min = int(time/60 - hour * 3600)
+	var sec = int(time - hour * 3600 - min * 60)
+	if hour < 10:
+		hour = str("0", hour)
+	if min < 10:
+		min = str("0", min)
+	if sec < 10:
+		sec = str("0", sec)
+
+	timer.text = str(hour, ":", min, ":", sec)
+
+func _on_start():
+	if not timer_active:
+		toggle_timer(true)
+	else:
+		toggle_timer(false)
+
+func toggle_timer(on: bool):
+	if on:
+		start.text = "Pause"
+		timer_active = true
+	else:
+		start.text = "Start"
+		timer_active = false	
+
+func _process(delta):
+	if not timer_active:
+		return
+
+	time -= delta
+	update_timer()
+
+	if timer.text == "00:00:00":
+		switch_mode()
+
+func switch_mode():
+	toggle_timer(false)
+
+	if mode == modes.WORK:
+		mode = modes.BREAK
+		time = break_time
+	else:
+		mode = modes.WORK
+		time = work_time
+
+	update_timer()
+
+func _on_skip_pressed():
+	switch_mode()

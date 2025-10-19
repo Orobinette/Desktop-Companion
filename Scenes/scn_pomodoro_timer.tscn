@@ -1,5 +1,49 @@
-[gd_scene format=3 uid="uid://0igsaq8hwu5c"]
+[gd_scene load_steps=2 format=3 uid="uid://0igsaq8hwu5c"]
 
-[node name="Pomodoro timer" type="Control"]
+[ext_resource type="Script" path="res://Scripts/Pomodoro.gd" id="1_ae6x0"]
+
+[node name="Pomodoro timer" type="Control" node_paths=PackedStringArray("start", "skip", "timer")]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_ae6x0")
+start = NodePath("HBoxContainer/Start Button")
+skip = NodePath("HBoxContainer/Skip Button")
+timer = NodePath("HBoxContainer/Timer")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 82.0
+offset_bottom = 23.0
+text = "Pomodoro
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 96.0
+offset_bottom = 70.0
+
+[node name="Start Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Start"
+
+[node name="Timer" type="RichTextLabel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "00:00:00
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Skip Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Skip"
+
+[connection signal="pressed" from="HBoxContainer/Start Button" to="." method="_on_start"]
+[connection signal="pressed" from="HBoxContainer/Skip Button" to="." method="_on_skip_pressed"]
