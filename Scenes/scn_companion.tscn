@@ -1,3 +1,48 @@
-[gd_scene format=3 uid="uid://b6c2nw8pk2ivf"]
+[gd_scene load_steps=2 format=3 uid="uid://b6c2nw8pk2ivf"]
 
-[node name="Companion" type="Node2D"]
+[ext_resource type="Script" path="res://Scripts/Controls.gd" id="1_gfw5g"]
+
+[node name="Companion" type="Node2D" node_paths=PackedStringArray("companion_button", "todo_button", "pomodoro_button", "settings_button", "close_button", "container")]
+script = ExtResource("1_gfw5g")
+companion_button = NodePath("Companion button")
+todo_button = NodePath("VBoxContainer/Todo")
+pomodoro_button = NodePath("VBoxContainer/Pomodoro")
+settings_button = NodePath("VBoxContainer/Settings")
+close_button = NodePath("VBoxContainer/Close")
+container = NodePath("VBoxContainer")
+
+[node name="Companion button" type="Button" parent="."]
+offset_right = 98.0
+offset_bottom = 31.0
+toggle_mode = true
+button_mask = 2
+text = "Companion"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+process_mode = 4
+visible = false
+offset_top = 47.0
+offset_right = 90.0
+offset_bottom = 183.0
+
+[node name="Todo" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Todo
+"
+
+[node name="Pomodoro" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pomodoro"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Close" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="toggled" from="Companion button" to="." method="_on_companion_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/Todo" to="." method="_on_todo_pressed"]
+[connection signal="pressed" from="VBoxContainer/Pomodoro" to="." method="_on_pomodoro_pressed"]
+[connection signal="pressed" from="VBoxContainer/Close" to="." method="_on_close_pressed"]
