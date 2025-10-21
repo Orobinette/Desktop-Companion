@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export var companion_button: Button
 @export var todo_button: Button
@@ -16,27 +16,17 @@ func _ready():
 	get_tree().get_root().set_transparent_background(true)
 	get_viewport().set_embedding_subwindows(false)
 
-	todo_win = Window.new()
+	todo_win = todo_path.instantiate()
 	todo_win.visible = false
 	add_child(todo_win)
 	close_todo()
-	todo_win.size = Vector2(300, 200)
-	todo_win.position = Vector2(10, 50)
-	todo_win.title = "Todo"
 	todo_win.close_requested.connect(close_todo)
-	var todo = todo_path.instantiate()
-	todo_win.add_child(todo)
 
-	pomodoro_win = Window.new()
+	pomodoro_win = pomodoro_path.instantiate()
 	pomodoro_win.visible = false
 	add_child(pomodoro_win)
 	close_pomodoro()
-	pomodoro_win.size = Vector2(118,76)
-	pomodoro_win.position = Vector2(10, 50)
-	pomodoro_win.title = "Pomodoro"
 	pomodoro_win.close_requested.connect(close_pomodoro)
-	var pomodoro = pomodoro_path.instantiate()
-	pomodoro_win.add_child(pomodoro)
 
 func _on_companion_button_toggled(on: bool):
 	if on:

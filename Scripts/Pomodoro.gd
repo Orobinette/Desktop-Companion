@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 @export var start: TextureButton
 @export var skip: TextureButton

@@ -16,9 +16,13 @@ default_font = ExtResource("2_kt7nc")
 [sub_resource type="Theme" id="Theme_nt1w6"]
 default_font = ExtResource("2_kt7nc")
 
-[node name="Pomodoro timer" type="Control" node_paths=PackedStringArray("start", "skip", "timer")]
-layout_mode = 3
-anchors_preset = 0
+[node name="Pomodoro timer" type="Window" node_paths=PackedStringArray("start", "skip", "timer")]
+position = Vector2i(10, 50)
+size = Vector2i(354, 228)
+content_scale_size = Vector2i(118, 76)
+content_scale_mode = 2
+content_scale_aspect = 3
+content_scale_stretch = 1
 script = ExtResource("1_ae6x0")
 start = NodePath("HBoxContainer/Start Button")
 skip = NodePath("HBoxContainer/Skip Button")
