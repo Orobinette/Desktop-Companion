@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6c2nw8pk2ivf"]
 
 [ext_resource type="Script" path="res://Scripts/Controls.gd" id="1_gfw5g"]
-[ext_resource type="Texture2D" uid="uid://crs52u6mkfowh" path="res://spr_body_builder.png" id="2_vkx8g"]
+[ext_resource type="Texture2D" uid="uid://crs52u6mkfowh" path="res://Sprites/spr_body_builder.png" id="2_vkx8g"]
 
 [node name="Companion" type="Node2D" node_paths=PackedStringArray("todo_button", "pomodoro_button", "settings_button", "close_button", "container")]
 script = ExtResource("1_gfw5g")

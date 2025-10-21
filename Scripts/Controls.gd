@@ -9,6 +9,8 @@ extends Node2D
 
 var todo_win
 var pomodoro_win
+var todo_path = load("res://Scenes/scn_todo.tscn")
+var pomodoro_path = load("res://Scenes/scn_pomodoro_timer.tscn")
 
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
@@ -22,15 +24,19 @@ func _ready():
 	todo_win.position = Vector2(10, 50)
 	todo_win.title = "Todo"
 	todo_win.close_requested.connect(close_todo)
+	var todo = todo_path.instantiate()
+	todo_win.add_child(todo)
 
 	pomodoro_win = Window.new()
 	pomodoro_win.visible = false
 	add_child(pomodoro_win)
 	close_pomodoro()
-	pomodoro_win.size = Vector2(300, 200)
+	pomodoro_win.size = Vector2(118,76)
 	pomodoro_win.position = Vector2(10, 50)
 	pomodoro_win.title = "Pomodoro"
 	pomodoro_win.close_requested.connect(close_pomodoro)
+	var pomodoro = pomodoro_path.instantiate()
+	pomodoro_win.add_child(pomodoro)
 
 func _on_companion_button_toggled(on: bool):
 	if on:
@@ -41,13 +47,15 @@ func _on_companion_button_toggled(on: bool):
 		container.visible = false
 
 func _on_todo_pressed():
+	pomodoro_win.visible = false
 	open_todo()
 
 func _on_pomodoro_pressed():
-	todo_win.visible = true
+	todo_win.visible = false
 	open_pomodoro()
 
 func open_todo():
+	todo_win.visible = true
 	todo_win.show()
 
 func close_todo():
@@ -59,7 +67,6 @@ func open_pomodoro():
 
 func close_pomodoro():
 	pomodoro_win.hide()
-
 
 func _on_close_pressed():
 	get_tree().quit()

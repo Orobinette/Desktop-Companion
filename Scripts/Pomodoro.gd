@@ -1,7 +1,7 @@
 extends Control
 
-@export var start: Button
-@export var skip: Button
+@export var start: TextureButton
+@export var skip: TextureButton
 @export var timer: RichTextLabel
 
 var timer_active: bool = false
@@ -11,6 +11,11 @@ var work_time: int = 5
 var break_time: int = 10
 @onready var mode = modes.WORK
 enum modes {WORK, BREAK}
+
+@export var start_sprite_n: Texture2D
+@export var start_sprite_h: Texture2D
+@export var pause_sprite_n: Texture2D
+@export var pause_sprite_h: Texture2D
 
 func _ready():
 	time = work_time
@@ -37,10 +42,12 @@ func _on_start():
 
 func toggle_timer(on: bool):
 	if on:
-		start.text = "Pause"
+		start.texture_normal = pause_sprite_n
+		start.texture_hover = pause_sprite_h
 		timer_active = true
 	else:
-		start.text = "Start"
+		start.texture_normal = start_sprite_n
+		start.texture_hover = start_sprite_h
 		timer_active = false	
 
 func _process(delta):
