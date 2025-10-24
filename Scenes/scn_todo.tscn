@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6dvvhrh03yhm"]
+[gd_scene load_steps=12 format=3 uid="uid://6dvvhrh03yhm"]
 
 [ext_resource type="Script" path="res://Scripts/Todo.gd" id="1_ijbd2"]
 [ext_resource type="Texture2D" uid="uid://ckxsb6y55o6lf" path="res://Sprites/spr_menu_todo.png" id="2_i1my4"]
@@ -14,7 +14,8 @@ default_font = ExtResource("4_12vuy")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aaneo"]
 texture = ExtResource("5_5brqj")
 texture_margin_left = 2.0
-texture_margin_top = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eui32"]
 
 [sub_resource type="Theme" id="Theme_u4hah"]
 
@@ -27,7 +28,7 @@ content_scale_aspect = 1
 content_scale_stretch = 1
 script = ExtResource("1_ijbd2")
 text_input = NodePath("Text Input")
-entry_container = NodePath("Entry Container")
+entry_container = NodePath("ScrollContainer/Entry Container")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_i1my4")
@@ -44,16 +45,17 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Todo"
 
-[node name="Text Input" type="TextEdit" parent="."]
+[node name="Text Input" type="LineEdit" parent="."]
 offset_left = 16.0
-offset_top = 36.0
+offset_top = 37.0
 offset_right = 84.0
-offset_bottom = 54.0
+offset_bottom = 53.0
 size_flags_horizontal = 8
 theme = SubResource("Theme_bqpf2")
 theme_override_styles/normal = SubResource("StyleBoxTexture_aaneo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eui32")
 placeholder_text = "-"
-scroll_smooth = true
+caret_blink = true
 
 [node name="Add Button" type="TextureButton" parent="."]
 offset_left = 88.0
@@ -63,13 +65,16 @@ offset_bottom = 78.0
 texture_normal = ExtResource("6_kx077")
 texture_hover = ExtResource("7_od1u3")
 
-[node name="Entry Container" type="VBoxContainer" parent="."]
-clip_contents = true
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 15.0
 offset_top = 57.0
-offset_right = 115.0
-offset_bottom = 170.0
+offset_right = 102.0
+offset_bottom = 172.0
+
+[node name="Entry Container" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = SubResource("Theme_u4hah")
-theme_override_constants/separation = 16
+theme_override_constants/separation = 0
 
 [connection signal="pressed" from="Add Button" to="." method="_on_add_button_pressed"]

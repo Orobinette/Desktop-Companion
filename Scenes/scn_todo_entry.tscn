@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqeavjas4bvyu"]
+[gd_scene load_steps=15 format=3 uid="uid://bqeavjas4bvyu"]
 
 [ext_resource type="Script" path="res://Scripts/TodoEntry.gd" id="1_7xkwc"]
 [ext_resource type="Texture2D" uid="uid://dgxyyt51dqxvo" path="res://Sprites/spr_check_normal.png" id="2_y2ypv"]
@@ -23,19 +23,18 @@ texture = ExtResource("4_0a2q1")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qrrco"]
 texture = ExtResource("5_2x7ye")
 
-[node name="Todo entry" type="Control" node_paths=PackedStringArray("check", "text_box")]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 62.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_af1d0"]
+
+[node name="Todo entry" type="HBoxContainer" node_paths=PackedStringArray("check", "text_box", "delete")]
+offset_right = 64.0
 offset_bottom = 16.0
 script = ExtResource("1_7xkwc")
 check = NodePath("Check Box")
 text_box = NodePath("Text")
+delete = NodePath("Delete Button")
 
 [node name="Check Box" type="CheckBox" parent="."]
 layout_mode = 2
-offset_right = 16.0
-offset_bottom = 16.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_jeqr3")
@@ -46,31 +45,26 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_badpg")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_ui1e5")
 theme_override_styles/hover = SubResource("StyleBoxTexture_yehps")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_qrrco")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_af1d0")
 
 [node name="Text" type="RichTextLabel" parent="."]
 clip_contents = false
 layout_mode = 2
-offset_left = 20.0
-offset_top = 5.0
-offset_right = 24.0
-offset_bottom = 11.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme = ExtResource("6_r4k6o")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 bbcode_enabled = true
-text = "-"
+text = "-
+"
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="Delete Button" type="TextureButton" parent="."]
 layout_mode = 2
-offset_left = 73.0
-offset_top = 1.0
-offset_right = 87.0
-offset_bottom = 15.0
 size_flags_vertical = 4
 texture_normal = ExtResource("7_7bacy")
 texture_hover = ExtResource("8_6xpcl")

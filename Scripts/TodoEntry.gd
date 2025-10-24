@@ -2,7 +2,7 @@ extends Node
 
 @export var check: CheckBox
 @export var text_box: RichTextLabel
-@export var delete: Button
+@export var delete: TextureButton
 
 var text: String
 
