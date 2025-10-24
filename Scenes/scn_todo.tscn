@@ -1,37 +1,75 @@
-[gd_scene load_steps=2 format=3 uid="uid://6dvvhrh03yhm"]
+[gd_scene load_steps=11 format=3 uid="uid://6dvvhrh03yhm"]
 
 [ext_resource type="Script" path="res://Scripts/Todo.gd" id="1_ijbd2"]
+[ext_resource type="Texture2D" uid="uid://ckxsb6y55o6lf" path="res://Sprites/spr_menu_todo.png" id="2_i1my4"]
+[ext_resource type="Theme" uid="uid://batwdv4faqriv" path="res://fnt_large_theme.tres" id="3_f4ke1"]
+[ext_resource type="FontFile" uid="uid://ditmfl8v0pdr5" path="res://fnt_small.ttf" id="4_12vuy"]
+[ext_resource type="Texture2D" uid="uid://65lcr2l5pujn" path="res://Sprites/spr_text_input.png" id="5_5brqj"]
+[ext_resource type="Texture2D" uid="uid://db5ta4aiekldn" path="res://Sprites/spr_add_normal.png" id="6_kx077"]
+[ext_resource type="Texture2D" uid="uid://enrxns7cijiu" path="res://Sprites/spr_add_hover.png" id="7_od1u3"]
+
+[sub_resource type="Theme" id="Theme_bqpf2"]
+default_font = ExtResource("4_12vuy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aaneo"]
+texture = ExtResource("5_5brqj")
+texture_margin_left = 2.0
+texture_margin_top = 4.0
+
+[sub_resource type="Theme" id="Theme_u4hah"]
 
 [node name="Todo" type="Window" node_paths=PackedStringArray("text_input", "entry_container")]
-position = Vector2i(100, 100)
-size = Vector2i(300, 300)
+position = Vector2i(10, 36)
+size = Vector2i(354, 558)
+content_scale_size = Vector2i(118, 186)
+content_scale_mode = 2
+content_scale_aspect = 1
+content_scale_stretch = 1
 script = ExtResource("1_ijbd2")
 text_input = NodePath("Text Input")
 entry_container = NodePath("Entry Container")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_i1my4")
+centered = false
+
 [node name="Title" type="RichTextLabel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+clip_contents = false
+offset_left = 44.0
+offset_top = 19.0
+offset_right = 84.0
+offset_bottom = 59.0
+theme = ExtResource("3_f4ke1")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 text = "Todo"
 
 [node name="Text Input" type="TextEdit" parent="."]
-offset_top = 33.0
-offset_right = 100.0
-offset_bottom = 73.0
+offset_left = 16.0
+offset_top = 36.0
+offset_right = 84.0
+offset_bottom = 54.0
 size_flags_horizontal = 8
+theme = SubResource("Theme_bqpf2")
+theme_override_styles/normal = SubResource("StyleBoxTexture_aaneo")
 placeholder_text = "-"
 scroll_smooth = true
 
-[node name="Add Button" type="Button" parent="."]
-offset_left = 110.0
-offset_top = 33.0
-offset_right = 148.0
-offset_bottom = 73.0
-text = "add"
+[node name="Add Button" type="TextureButton" parent="."]
+offset_left = 88.0
+offset_top = 38.0
+offset_right = 126.0
+offset_bottom = 78.0
+texture_normal = ExtResource("6_kx077")
+texture_hover = ExtResource("7_od1u3")
 
 [node name="Entry Container" type="VBoxContainer" parent="."]
-offset_top = 85.0
-offset_right = 40.0
-offset_bottom = 125.0
+clip_contents = true
+offset_left = 15.0
+offset_top = 57.0
+offset_right = 115.0
+offset_bottom = 170.0
+theme = SubResource("Theme_u4hah")
+theme_override_constants/separation = 16
 
 [connection signal="pressed" from="Add Button" to="." method="_on_add_button_pressed"]

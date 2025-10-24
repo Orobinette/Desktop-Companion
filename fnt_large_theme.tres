@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://batwdv4faqriv"]
+
+[ext_resource type="FontFile" uid="uid://b22x4sj87nf3c" path="res://fnt_large.ttf" id="1_joq7i"]
+
+[resource]
+default_font = ExtResource("1_joq7i")

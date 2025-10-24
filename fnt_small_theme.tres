@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dynkd3lqiuty3"]
+
+[ext_resource type="FontFile" uid="uid://ditmfl8v0pdr5" path="res://fnt_small.ttf" id="1_0i34e"]
+
+[resource]
+default_font = ExtResource("1_0i34e")

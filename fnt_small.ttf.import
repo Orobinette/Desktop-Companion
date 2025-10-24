@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b22x4sj87nf3c"
-path="res://.godot/imported/mg_dialogue.ttf-6977a6608d903b19aea30820712360a0.fontdata"
+uid="uid://ditmfl8v0pdr5"
+path="res://.godot/imported/fnt_small.ttf-7ad7b2a1234ba84f960331b04d2dea71.fontdata"
 
 [deps]
 
-source_file="res://mg_dialogue.ttf"
-dest_files=["res://.godot/imported/mg_dialogue.ttf-6977a6608d903b19aea30820712360a0.fontdata"]
+source_file="res://fnt_small.ttf"
+dest_files=["res://.godot/imported/fnt_small.ttf-7ad7b2a1234ba84f960331b04d2dea71.fontdata"]
 
 [params]
 

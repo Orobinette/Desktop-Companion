@@ -3,15 +3,13 @@
 [ext_resource type="Script" path="res://Scripts/Pomodoro.gd" id="1_ae6x0"]
 [ext_resource type="Texture2D" uid="uid://blwq60cwy8wum" path="res://Sprites/spr_play_normal.png" id="2_660k3"]
 [ext_resource type="Texture2D" uid="uid://dx7v1ta3rtf5g" path="res://Sprites/spr_menu_pomodoro.png" id="2_j50wd"]
-[ext_resource type="FontFile" uid="uid://b22x4sj87nf3c" path="res://mg_dialogue.ttf" id="2_kt7nc"]
+[ext_resource type="FontFile" uid="uid://b22x4sj87nf3c" path="res://fnt_large.ttf" id="2_kt7nc"]
 [ext_resource type="Texture2D" uid="uid://ui7sdn2f4e4u" path="res://Sprites/spr_play_hover.png" id="3_uw5sy"]
 [ext_resource type="Texture2D" uid="uid://clw8jmg1temt4" path="res://Sprites/spr_pause_normal.png" id="4_gnc07"]
 [ext_resource type="Texture2D" uid="uid://rrkohlya0vha" path="res://Sprites/spr_restart_normal.png" id="4_qnb42"]
 [ext_resource type="Texture2D" uid="uid://bh8fr3bqvimum" path="res://Sprites/spr_restart_hover.png" id="5_36nkq"]
 [ext_resource type="Texture2D" uid="uid://d2npngg557kci" path="res://Sprites/spr_pause_hover.png" id="5_ghmex"]
-
-[sub_resource type="Theme" id="Theme_eageb"]
-default_font = ExtResource("2_kt7nc")
+[ext_resource type="Theme" uid="uid://batwdv4faqriv" path="res://fnt_large_theme.tres" id="7_q52pd"]
 
 [sub_resource type="Theme" id="Theme_nt1w6"]
 default_font = ExtResource("2_kt7nc")
@@ -42,7 +40,7 @@ offset_left = 29.0
 offset_top = 19.0
 offset_right = 89.0
 offset_bottom = 35.0
-theme = SubResource("Theme_eageb")
+theme = ExtResource("7_q52pd")
 theme_override_colors/font_outline_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_constants/outline_size = 3
 text = "Pomodoro
