@@ -1,22 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6c2nw8pk2ivf"]
+[gd_scene load_steps=4 format=3 uid="uid://b6c2nw8pk2ivf"]
 
 [ext_resource type="Script" path="res://Scripts/Controls.gd" id="1_gfw5g"]
 [ext_resource type="Texture2D" uid="uid://crs52u6mkfowh" path="res://Sprites/spr_body_builder.png" id="2_vkx8g"]
 
-[node name="Companion" type="Node2D" node_paths=PackedStringArray("todo_button", "pomodoro_button", "settings_button", "close_button", "container")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vy3q"]
+size = Vector2(102, 77)
+
+[node name="Companion" type="Sprite2D" node_paths=PackedStringArray("todo_button", "pomodoro_button", "settings_button", "close_button", "container", "click_timer")]
+texture = ExtResource("2_vkx8g")
+centered = false
 script = ExtResource("1_gfw5g")
 todo_button = NodePath("VBoxContainer/Todo")
 pomodoro_button = NodePath("VBoxContainer/Pomodoro")
 settings_button = NodePath("VBoxContainer/Settings")
 close_button = NodePath("VBoxContainer/Close")
 container = NodePath("VBoxContainer")
-
-[node name="Companion button" type="TextureButton" parent="."]
-offset_right = 102.0
-offset_bottom = 77.0
-toggle_mode = true
-button_mask = 2
-texture_normal = ExtResource("2_vkx8g")
+click_timer = NodePath("Click timer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 process_mode = 4
@@ -42,7 +41,18 @@ text = "Settings"
 layout_mode = 2
 text = "Close"
 
-[connection signal="toggled" from="Companion button" to="." method="_on_companion_button_toggled"]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(51, 39)
+shape = SubResource("RectangleShape2D_1vy3q")
+
+[node name="Click timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
 [connection signal="pressed" from="VBoxContainer/Todo" to="." method="_on_todo_pressed"]
 [connection signal="pressed" from="VBoxContainer/Pomodoro" to="." method="_on_pomodoro_pressed"]
 [connection signal="pressed" from="VBoxContainer/Close" to="." method="_on_close_pressed"]
+[connection signal="input_event" from="StaticBody2D" to="." method="_on_companion_event"]

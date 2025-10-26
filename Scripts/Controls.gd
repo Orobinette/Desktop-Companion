@@ -1,11 +1,17 @@
-extends Node
+extends Node2D
 
+@onready var win: Window = get_window()
 @export var companion_button: Button
 @export var todo_button: Button
 @export var pomodoro_button: Button
 @export var settings_button: Button
 @export var close_button: Button
 @export var container: VBoxContainer
+@export var click_timer: Timer
+
+var buttons_on: bool = false
+var dragging: bool
+var offset: int
 
 var todo_win
 var pomodoro_win
@@ -28,8 +34,22 @@ func _ready():
 	close_pomodoro()
 	pomodoro_win.close_requested.connect(close_pomodoro)
 
-func _on_companion_button_toggled(on: bool):
-	if on:
+func _process(_delta):
+	if Input.is_action_just_pressed("interact"): # Initial press
+		offset = win.position.x - DisplayServer.mouse_get_position().x
+		click_timer.start(0.05)
+	elif Input.is_action_just_released("interact") and !click_timer.is_stopped(): # Left Click
+			print("click")
+	elif Input.is_action_pressed("interact") and click_timer.is_stopped(): # Left Drag
+		win.position.x = DisplayServer.mouse_get_position().x + offset
+	
+	if Input.is_action_just_pressed("open_quick_menu"): # Right click
+		toggle_buttons()
+
+func toggle_buttons():
+	buttons_on = !buttons_on
+
+	if buttons_on:
 		container.process_mode = PROCESS_MODE_INHERIT
 		container.visible = true
 	else:
