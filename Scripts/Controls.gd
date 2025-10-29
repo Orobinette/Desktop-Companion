@@ -1,12 +1,12 @@
-extends Node2D
+extends Node
 
 @onready var win: Window = get_window()
-@export var companion_button: Button
-@export var todo_button: Button
-@export var pomodoro_button: Button
-@export var settings_button: Button
-@export var close_button: Button
-@export var container: VBoxContainer
+@export var companion_button: TextureButton
+@export var todo_button: TextureButton
+@export var pomodoro_button: TextureButton
+@export var settings_button: TextureButton
+@export var close_button: TextureButton
+@export var container: HBoxContainer
 @export var click_timer: Timer
 
 var buttons_on: bool = false
@@ -18,7 +18,11 @@ var pomodoro_win
 var todo_path = load("res://Scenes/scn_todo.tscn")
 var pomodoro_path = load("res://Scenes/scn_pomodoro_timer.tscn")
 
+func _init():
+	pass
+
 func _ready():
+	win.position = DisplayServer.screen_get_usable_rect().size - get_viewport().size
 	get_tree().get_root().set_transparent_background(true)
 	get_viewport().set_embedding_subwindows(false)
 

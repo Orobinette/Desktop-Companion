@@ -1,58 +1,73 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6c2nw8pk2ivf"]
+[gd_scene load_steps=12 format=3 uid="uid://b6c2nw8pk2ivf"]
 
 [ext_resource type="Script" path="res://Scripts/Controls.gd" id="1_gfw5g"]
 [ext_resource type="Texture2D" uid="uid://crs52u6mkfowh" path="res://Sprites/spr_body_builder.png" id="2_vkx8g"]
+[ext_resource type="Texture2D" uid="uid://6gq43if5bxv2" path="res://Sprites/spr_cross_normal.png" id="3_onkyl"]
+[ext_resource type="Texture2D" uid="uid://bbrycr7ej5jg1" path="res://Sprites/spr_cross_hover.png" id="4_ut36f"]
+[ext_resource type="Texture2D" uid="uid://uvcyxeil1cax" path="res://Sprites/spr_button_pomo_normal.png" id="5_wovx8"]
+[ext_resource type="Texture2D" uid="uid://bqt6ow3ov2i1w" path="res://Sprites/spr_button_pomo_hover.png" id="6_7anb1"]
+[ext_resource type="Texture2D" uid="uid://bgkg2ojs25b24" path="res://Sprites/spr_button_settings_normal.png" id="7_iefpo"]
+[ext_resource type="Texture2D" uid="uid://c4shtjoje11b3" path="res://Sprites/spr_button_settings_hover.png" id="8_xbk62"]
+[ext_resource type="Texture2D" uid="uid://xkv0k6uax2lq" path="res://Sprites/spr_button_close_normal.png" id="9_qgubj"]
+[ext_resource type="Texture2D" uid="uid://cp6xitt5cmacg" path="res://Sprites/spr_button_close_hover.png" id="10_sqv43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vy3q"]
 size = Vector2(102, 77)
 
-[node name="Companion" type="Sprite2D" node_paths=PackedStringArray("todo_button", "pomodoro_button", "settings_button", "close_button", "container", "click_timer")]
-texture = ExtResource("2_vkx8g")
-centered = false
+[node name="Companion" type="Node" node_paths=PackedStringArray("todo_button", "pomodoro_button", "settings_button", "close_button", "container", "click_timer")]
 script = ExtResource("1_gfw5g")
-todo_button = NodePath("VBoxContainer/Todo")
-pomodoro_button = NodePath("VBoxContainer/Pomodoro")
-settings_button = NodePath("VBoxContainer/Settings")
-close_button = NodePath("VBoxContainer/Close")
-container = NodePath("VBoxContainer")
+todo_button = NodePath("HBoxContainer/Todo")
+pomodoro_button = NodePath("HBoxContainer/Pomodoro")
+settings_button = NodePath("HBoxContainer/Settings")
+close_button = NodePath("HBoxContainer/Close")
+container = NodePath("HBoxContainer")
 click_timer = NodePath("Click timer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-process_mode = 4
-visible = false
-offset_left = 109.0
-offset_right = 199.0
-offset_bottom = 136.0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 25)
+texture = ExtResource("2_vkx8g")
+centered = false
 
-[node name="Todo" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Todo
-"
-
-[node name="Pomodoro" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Pomodoro"
-
-[node name="Settings" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Settings"
-
-[node name="Close" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Close"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
 input_pickable = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
 position = Vector2(51, 39)
 shape = SubResource("RectangleShape2D_1vy3q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+process_mode = 4
+visible = false
+offset_right = 102.0
+offset_bottom = 23.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Todo" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_onkyl")
+texture_hover = ExtResource("4_ut36f")
+
+[node name="Pomodoro" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_wovx8")
+texture_hover = ExtResource("6_7anb1")
+
+[node name="Settings" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_iefpo")
+texture_hover = ExtResource("8_xbk62")
+
+[node name="Close" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_qgubj")
+texture_pressed = ExtResource("10_sqv43")
+texture_hover = ExtResource("10_sqv43")
 
 [node name="Click timer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
 
-[connection signal="pressed" from="VBoxContainer/Todo" to="." method="_on_todo_pressed"]
-[connection signal="pressed" from="VBoxContainer/Pomodoro" to="." method="_on_pomodoro_pressed"]
-[connection signal="pressed" from="VBoxContainer/Close" to="." method="_on_close_pressed"]
-[connection signal="input_event" from="StaticBody2D" to="." method="_on_companion_event"]
+[connection signal="pressed" from="HBoxContainer/Todo" to="." method="_on_todo_pressed"]
+[connection signal="pressed" from="HBoxContainer/Pomodoro" to="." method="_on_pomodoro_pressed"]
+[connection signal="pressed" from="HBoxContainer/Close" to="." method="_on_close_pressed"]
