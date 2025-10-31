@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Controls.gd" id="1_gfw5g"]
 [ext_resource type="Texture2D" uid="uid://crs52u6mkfowh" path="res://Sprites/spr_body_builder.png" id="2_vkx8g"]
-[ext_resource type="Texture2D" uid="uid://6gq43if5bxv2" path="res://Sprites/spr_cross_normal.png" id="3_onkyl"]
-[ext_resource type="Texture2D" uid="uid://bbrycr7ej5jg1" path="res://Sprites/spr_cross_hover.png" id="4_ut36f"]
+[ext_resource type="Texture2D" uid="uid://fs1m8au3b05q" path="res://Sprites/spr_button_todo_normal.png" id="3_goy80"]
+[ext_resource type="Texture2D" uid="uid://doclsqtvui6h" path="res://Sprites/spr_button_todo_hover.png" id="4_clfu5"]
 [ext_resource type="Texture2D" uid="uid://uvcyxeil1cax" path="res://Sprites/spr_button_pomo_normal.png" id="5_wovx8"]
 [ext_resource type="Texture2D" uid="uid://bqt6ow3ov2i1w" path="res://Sprites/spr_button_pomo_hover.png" id="6_7anb1"]
 [ext_resource type="Texture2D" uid="uid://bgkg2ojs25b24" path="res://Sprites/spr_button_settings_normal.png" id="7_iefpo"]
@@ -45,8 +45,8 @@ alignment = 1
 
 [node name="Todo" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("3_onkyl")
-texture_hover = ExtResource("4_ut36f")
+texture_normal = ExtResource("3_goy80")
+texture_hover = ExtResource("4_clfu5")
 
 [node name="Pomodoro" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
