@@ -1,3 +1,89 @@
-[gd_scene format=3 uid="uid://bq86crgbs36xi"]
+[gd_scene load_steps=7 format=3 uid="uid://bq86crgbs36xi"]
 
-[node name="Settings" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://bfma6jn5te17w" path="res://Sprites/spr_menu_settings.png" id="1_nlh03"]
+[ext_resource type="Theme" uid="uid://batwdv4faqriv" path="res://fnt_large_theme.tres" id="2_ihjxs"]
+[ext_resource type="Theme" uid="uid://dynkd3lqiuty3" path="res://fnt_small_theme.tres" id="3_l67jg"]
+[ext_resource type="Texture2D" uid="uid://b2nknhd1j3wbu" path="res://Sprites/spr_text_settings.png" id="4_gu4k8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sj1my"]
+texture = ExtResource("4_gu4k8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qkx27"]
+texture = ExtResource("4_gu4k8")
+
+[node name="Settings" type="Node"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_nlh03")
+centered = false
+
+[node name="Title" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = 18.0
+offset_top = 19.0
+offset_right = 67.0
+offset_bottom = 35.0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("2_ihjxs")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Settings"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Node" type="Node2D" parent="."]
+position = Vector2(17, 22)
+
+[node name="Work time" type="RichTextLabel" parent="Node"]
+clip_contents = false
+offset_top = 29.0
+offset_right = 34.0
+offset_bottom = 35.0
+theme = ExtResource("3_l67jg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Work time"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Pomo work time" type="LineEdit" parent="Node"]
+offset_left = 40.0
+offset_top = 28.0
+offset_right = 56.0
+offset_bottom = 38.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_l67jg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_sj1my")
+text = "12"
+alignment = 1
+max_length = 2
+virtual_keyboard_type = 2
+
+[node name="Break label" type="RichTextLabel" parent="Node"]
+clip_contents = false
+offset_top = 19.0
+offset_right = 38.0
+offset_bottom = 25.0
+theme = ExtResource("3_l67jg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Break time"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Pomo break time" type="LineEdit" parent="Node"]
+offset_left = 40.0
+offset_top = 17.0
+offset_right = 56.0
+offset_bottom = 27.0
+theme = ExtResource("3_l67jg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_qkx27")
+text = "12"
+alignment = 1
+max_length = 2
+virtual_keyboard_type = 2
+caret_blink = true
