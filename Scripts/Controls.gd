@@ -15,11 +15,10 @@ var offset: int
 
 var todo_win
 var pomodoro_win
+var settings_win
 var todo_path = load("res://Scenes/scn_todo.tscn")
 var pomodoro_path = load("res://Scenes/scn_pomodoro_timer.tscn")
-
-func _init():
-	pass
+var settings_path = load("res://Scenes/scn_settings.tscn")
 
 func _ready():
 	win.position = DisplayServer.screen_get_usable_rect().size - get_viewport().size
@@ -37,6 +36,12 @@ func _ready():
 	add_child(pomodoro_win)
 	close_pomodoro()
 	pomodoro_win.close_requested.connect(close_pomodoro)
+
+	settings_win = settings_path.instantiate()
+	settings_win.visible = false
+	add_child(settings_win)
+	close_pomodoro()
+	settings_win.close_requested.connect(close_settings)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("interact"): # Initial press
@@ -62,11 +67,18 @@ func toggle_buttons():
 
 func _on_todo_pressed():
 	pomodoro_win.visible = false
+	settings_win.visible = false
 	open_todo()
 
 func _on_pomodoro_pressed():
 	todo_win.visible = false
+	settings_win.visible = false
 	open_pomodoro()
+
+func _on_settings_pressed():
+	todo_win.visible = false
+	pomodoro_win.visible = false
+	open_settings()
 
 func open_todo():
 	todo_win.visible = true
@@ -81,6 +93,13 @@ func open_pomodoro():
 
 func close_pomodoro():
 	pomodoro_win.hide()
+
+func open_settings():
+	settings_win.visible = true
+	settings_win.show()
+
+func close_settings():
+	settings_win.hide()
 
 func _on_close_pressed():
 	get_tree().quit()

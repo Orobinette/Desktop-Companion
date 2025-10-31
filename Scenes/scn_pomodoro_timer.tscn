@@ -80,5 +80,7 @@ layout_mode = 2
 texture_normal = ExtResource("4_qnb42")
 texture_hover = ExtResource("5_36nkq")
 
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/Start Button" to="." method="_on_start"]
 [connection signal="pressed" from="HBoxContainer/Skip Button" to="." method="_on_skip_pressed"]

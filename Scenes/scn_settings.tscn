@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq86crgbs36xi"]
+[gd_scene load_steps=10 format=3 uid="uid://bq86crgbs36xi"]
 
+[ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_4t2lq"]
 [ext_resource type="Texture2D" uid="uid://bfma6jn5te17w" path="res://Sprites/spr_menu_settings.png" id="1_nlh03"]
 [ext_resource type="Theme" uid="uid://batwdv4faqriv" path="res://fnt_large_theme.tres" id="2_ihjxs"]
 [ext_resource type="Theme" uid="uid://dynkd3lqiuty3" path="res://fnt_small_theme.tres" id="3_l67jg"]
@@ -8,10 +9,22 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sj1my"]
 texture = ExtResource("4_gu4k8")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6f2rh"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qkx27"]
 texture = ExtResource("4_gu4k8")
 
-[node name="Settings" type="Node"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unknf"]
+
+[node name="Settings" type="Window" node_paths=PackedStringArray("work_time_input", "break_time_input")]
+position = Vector2i(0, 36)
+size = Vector2i(270, 228)
+content_scale_size = Vector2i(90, 76)
+content_scale_mode = 2
+content_scale_aspect = 1
+script = ExtResource("1_4t2lq")
+work_time_input = NodePath("Node/Pomo work time")
+break_time_input = NodePath("Node/Pomo break time")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_nlh03")
@@ -19,9 +32,9 @@ centered = false
 
 [node name="Title" type="RichTextLabel" parent="."]
 clip_contents = false
-offset_left = 18.0
+offset_left = 21.0
 offset_top = 19.0
-offset_right = 67.0
+offset_right = 70.0
 offset_bottom = 35.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
@@ -38,9 +51,9 @@ position = Vector2(17, 22)
 
 [node name="Work time" type="RichTextLabel" parent="Node"]
 clip_contents = false
-offset_top = 29.0
+offset_top = 30.0
 offset_right = 34.0
-offset_bottom = 35.0
+offset_bottom = 36.0
 theme = ExtResource("3_l67jg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -49,15 +62,15 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Pomo work time" type="LineEdit" parent="Node"]
-offset_left = 40.0
+offset_left = 41.0
 offset_top = 28.0
-offset_right = 56.0
+offset_right = 57.0
 offset_bottom = 38.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("3_l67jg")
 theme_override_styles/normal = SubResource("StyleBoxTexture_sj1my")
-text = "12"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6f2rh")
 alignment = 1
 max_length = 2
 virtual_keyboard_type = 2
@@ -76,14 +89,17 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Pomo break time" type="LineEdit" parent="Node"]
-offset_left = 40.0
+offset_left = 41.0
 offset_top = 17.0
-offset_right = 56.0
+offset_right = 57.0
 offset_bottom = 27.0
 theme = ExtResource("3_l67jg")
 theme_override_styles/normal = SubResource("StyleBoxTexture_qkx27")
-text = "12"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_unknf")
 alignment = 1
 max_length = 2
 virtual_keyboard_type = 2
 caret_blink = true
+
+[connection signal="text_changed" from="Node/Pomo work time" to="." method="_on_pomo_work_time_text_changed"]
+[connection signal="text_changed" from="Node/Pomo break time" to="." method="_on_pomo_break_time_text_changed"]

@@ -70,4 +70,5 @@ one_shot = true
 
 [connection signal="pressed" from="HBoxContainer/Todo" to="." method="_on_todo_pressed"]
 [connection signal="pressed" from="HBoxContainer/Pomodoro" to="." method="_on_pomodoro_pressed"]
+[connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/Close" to="." method="_on_close_pressed"]

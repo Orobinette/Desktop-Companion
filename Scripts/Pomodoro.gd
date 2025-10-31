@@ -1,5 +1,7 @@
 extends Node
 
+@onready var settings
+
 @export var start: TextureButton
 @export var skip: TextureButton
 @export var timer: RichTextLabel
@@ -18,8 +20,11 @@ enum modes {WORK, BREAK}
 @export var pause_sprite_h: Texture2D
 
 func _ready():
+	print("br")
 	time = work_time
 	update_timer()
+	await get_tree().process_frame
+	settings = $"../Settings"
 
 func update_timer():
 	var hour = int(time/60/60)
@@ -73,4 +78,10 @@ func switch_mode():
 	update_timer()
 
 func _on_skip_pressed():
-	switch_mode()
+	if timer_active:
+		switch_mode()
+
+func _on_visibility_changed():
+	work_time = settings.work_time
+	break_time = settings.break_time
+	update_timer()
