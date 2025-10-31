@@ -2,6 +2,7 @@ extends Node
 
 @onready var settings
 
+@export var win_sprite: Sprite2D
 @export var start: TextureButton
 @export var skip: TextureButton
 @export var timer: RichTextLabel
@@ -18,13 +19,8 @@ enum modes {WORK, BREAK}
 @export var start_sprite_h: Texture2D
 @export var pause_sprite_n: Texture2D
 @export var pause_sprite_h: Texture2D
-
-func _ready():
-	print("br")
-	time = work_time
-	update_timer()
-	await get_tree().process_frame
-	settings = $"../Settings"
+@export var work_texture: Texture2D
+@export var break_texture: Texture2D
 
 func update_timer():
 	var hour = int(time/60/60)
@@ -39,11 +35,27 @@ func update_timer():
 
 	timer.text = str(hour, ":", min, ":", sec)
 
-func _on_start():
-	if not timer_active:
-		toggle_timer(true)
+func set_mode(new_mode):
+	mode = new_mode
+
+	toggle_timer(false)
+
+	if mode == modes.WORK:
+		time = work_time
+		win_sprite.texture = work_texture
+		print("br")
 	else:
-		toggle_timer(false)
+		time = break_time
+		win_sprite.texture = break_texture
+
+	update_timer()
+
+
+func switch_mode():
+	if mode == modes.WORK:
+		set_mode(modes.BREAK)
+	else:
+		set_mode(modes.WORK)
 
 func toggle_timer(on: bool):
 	if on:
@@ -55,6 +67,13 @@ func toggle_timer(on: bool):
 		start.texture_hover = start_sprite_h
 		timer_active = false	
 
+
+func _ready():
+	time = work_time
+	set_mode(modes.WORK)
+	await get_tree().process_frame
+	settings = $"../Settings"
+
 func _process(delta):
 	if not timer_active:
 		return
@@ -65,23 +84,17 @@ func _process(delta):
 	if timer.text == "00:00:00":
 		switch_mode()
 
-func switch_mode():
-	toggle_timer(false)
-
-	if mode == modes.WORK:
-		mode = modes.BREAK
-		time = break_time
+func _on_play_pressed():
+	if not timer_active:
+		toggle_timer(true)
 	else:
-		mode = modes.WORK
-		time = work_time
-
-	update_timer()
+		toggle_timer(false)
 
 func _on_skip_pressed():
 	if timer_active:
 		switch_mode()
 
 func _on_visibility_changed():
-	work_time = settings.work_time
-	break_time = settings.break_time
-	update_timer()
+	work_time = settings.work_time * 60
+	break_time = settings.break_time * 60
+	set_mode(modes.WORK)

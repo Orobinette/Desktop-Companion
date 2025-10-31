@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx7v1ta3rtf5g"
-path="res://.godot/imported/spr_menu_pomodoro.png-87e72bada3fb6e95d4e5a40619281888.ctex"
+uid="uid://bywterh22q1mw"
+path="res://.godot/imported/spr_pomodoro_bar.png-2ea97f69508a96fb1748851c9de69788.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/spr_menu_pomodoro.png"
-dest_files=["res://.godot/imported/spr_menu_pomodoro.png-87e72bada3fb6e95d4e5a40619281888.ctex"]
+source_file="res://Sprites/spr_pomodoro_bar.png"
+dest_files=["res://.godot/imported/spr_pomodoro_bar.png-2ea97f69508a96fb1748851c9de69788.ctex"]
 
 [params]
 
