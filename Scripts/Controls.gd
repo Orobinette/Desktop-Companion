@@ -12,6 +12,7 @@ extends Node
 var buttons_on: bool = false
 var dragging: bool
 var offset: int
+var mouse_entered: bool = false
 
 var todo_win
 var pomodoro_win
@@ -44,12 +45,15 @@ func _ready():
 	settings_win.close_requested.connect(close_settings)
 
 func _process(_delta):
+	if !mouse_entered:
+		return
+	
 	if Input.is_action_just_pressed("interact"): # Initial press
 		offset = win.position.x - DisplayServer.mouse_get_position().x
-		click_timer.start(0.05)
+		click_timer.start(0.1)
 	elif Input.is_action_just_released("interact") and !click_timer.is_stopped(): # Left Click
 		print("click")
-	elif Input.is_action_pressed("interact") and click_timer.is_stopped(): # Left Drag
+	if Input.is_action_pressed("interact"):# Left Drag
 		win.position.x = DisplayServer.mouse_get_position().x + offset
 	
 	if Input.is_action_just_pressed("open_quick_menu"): # Right click
@@ -64,6 +68,12 @@ func toggle_buttons():
 	else:
 		container.process_mode = PROCESS_MODE_DISABLED
 		container.visible = false
+
+func _on_mouse_entered():
+	mouse_entered = true
+
+func _on_mouse_exited():
+	mouse_entered = false
 
 func _on_todo_pressed():
 	open_todo()
