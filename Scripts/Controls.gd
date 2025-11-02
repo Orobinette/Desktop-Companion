@@ -48,7 +48,7 @@ func _process(_delta):
 		offset = win.position.x - DisplayServer.mouse_get_position().x
 		click_timer.start(0.05)
 	elif Input.is_action_just_released("interact") and !click_timer.is_stopped(): # Left Click
-			print("click")
+		print("click")
 	elif Input.is_action_pressed("interact") and click_timer.is_stopped(): # Left Drag
 		win.position.x = DisplayServer.mouse_get_position().x + offset
 	
@@ -66,18 +66,12 @@ func toggle_buttons():
 		container.visible = false
 
 func _on_todo_pressed():
-	pomodoro_win.visible = false
-	settings_win.visible = false
 	open_todo()
 
 func _on_pomodoro_pressed():
-	todo_win.visible = false
-	settings_win.visible = false
 	open_pomodoro()
 
 func _on_settings_pressed():
-	todo_win.visible = false
-	pomodoro_win.visible = false
 	open_settings()
 
 func open_todo():

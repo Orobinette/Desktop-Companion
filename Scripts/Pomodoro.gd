@@ -10,8 +10,8 @@ extends Node
 var timer_active: bool = false
 var time: float = 0
 
-var work_time: int = 5
-var break_time: int = 10
+var work_time: int 
+var break_time: int 
 @onready var mode = modes.WORK
 enum modes {WORK, BREAK}
 
@@ -43,7 +43,6 @@ func set_mode(new_mode):
 	if mode == modes.WORK:
 		time = work_time
 		win_sprite.texture = work_texture
-		print("br")
 	else:
 		time = break_time
 		win_sprite.texture = break_texture
@@ -69,10 +68,12 @@ func toggle_timer(on: bool):
 
 
 func _ready():
-	time = work_time
-	set_mode(modes.WORK)
 	await get_tree().process_frame
 	settings = $"../Settings"
+	work_time = settings.player_prefs["work_time"]
+	break_time = settings.player_prefs["break_time"]
+	time = work_time
+	set_mode(modes.WORK)
 
 func _process(delta):
 	if not timer_active:
@@ -95,6 +96,6 @@ func _on_skip_pressed():
 		switch_mode()
 
 func _on_visibility_changed():
-	work_time = settings.work_time * 60
-	break_time = settings.break_time * 60
+	work_time = settings.player_prefs["work_time"] * 60
+	break_time = settings.player_prefs["break_time"] * 60
 	set_mode(modes.WORK)

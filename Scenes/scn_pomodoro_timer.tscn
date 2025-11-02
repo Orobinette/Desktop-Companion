@@ -16,7 +16,7 @@
 default_font = ExtResource("2_kt7nc")
 
 [node name="Pomodoro timer" type="Window" node_paths=PackedStringArray("win_sprite", "start", "skip", "timer")]
-position = Vector2i(10, 50)
+position = Vector2i(10, 36)
 size = Vector2i(354, 228)
 content_scale_size = Vector2i(118, 76)
 content_scale_mode = 2
