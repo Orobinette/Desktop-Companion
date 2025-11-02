@@ -59,9 +59,9 @@ position = Vector2(17, 22)
 
 [node name="Work time" type="RichTextLabel" parent="Node"]
 clip_contents = false
-offset_top = 41.0
+offset_top = 30.0
 offset_right = 34.0
-offset_bottom = 47.0
+offset_bottom = 36.0
 theme = ExtResource("3_l67jg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -86,9 +86,9 @@ virtual_keyboard_type = 2
 
 [node name="Break label" type="RichTextLabel" parent="Node"]
 clip_contents = false
-offset_top = 30.0
+offset_top = 41.0
 offset_right = 38.0
-offset_bottom = 36.0
+offset_bottom = 47.0
 theme = ExtResource("3_l67jg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
@@ -132,7 +132,6 @@ offset_bottom = 8.0
 theme = ExtResource("3_l67jg")
 theme_override_styles/normal = SubResource("StyleBoxTexture_w2eab")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_1vngn")
-text = "adfasd"
 caret_blink = true
 
 [connection signal="text_changed" from="Node/Work time/Pomo work time" to="." method="_on_pomo_work_time_text_changed"]

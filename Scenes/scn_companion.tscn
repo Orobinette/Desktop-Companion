@@ -17,15 +17,15 @@ size = Vector2(102, 77)
 
 [node name="Companion" type="Node" node_paths=PackedStringArray("todo_button", "pomodoro_button", "settings_button", "close_button", "container", "click_timer")]
 script = ExtResource("1_gfw5g")
-todo_button = NodePath("HBoxContainer/Todo")
-pomodoro_button = NodePath("HBoxContainer/Pomodoro")
-settings_button = NodePath("HBoxContainer/Settings")
-close_button = NodePath("HBoxContainer/Close")
-container = NodePath("HBoxContainer")
+todo_button = NodePath("Sprite2D/Button container/Todo")
+pomodoro_button = NodePath("Sprite2D/Button container/Pomodoro")
+settings_button = NodePath("Sprite2D/Button container/Settings")
+close_button = NodePath("Sprite2D/Button container/Close")
+container = NodePath("Sprite2D/Button container")
 click_timer = NodePath("Click timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(86, 25)
+position = Vector2(57, 15)
 texture = ExtResource("2_vkx8g")
 centered = false
 
@@ -36,31 +36,31 @@ input_pickable = true
 position = Vector2(51, 39)
 shape = SubResource("RectangleShape2D_1vy3q")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Button container" type="VBoxContainer" parent="Sprite2D"]
 process_mode = 4
 visible = false
-offset_left = 86.0
-offset_right = 188.0
-offset_bottom = 23.0
+offset_left = 102.0
+offset_top = -15.0
+offset_right = 125.0
+offset_bottom = 77.0
 theme_override_constants/separation = 0
-alignment = 1
 
-[node name="Todo" type="TextureButton" parent="HBoxContainer"]
+[node name="Todo" type="TextureButton" parent="Sprite2D/Button container"]
 layout_mode = 2
 texture_normal = ExtResource("3_goy80")
 texture_hover = ExtResource("4_clfu5")
 
-[node name="Pomodoro" type="TextureButton" parent="HBoxContainer"]
+[node name="Pomodoro" type="TextureButton" parent="Sprite2D/Button container"]
 layout_mode = 2
 texture_normal = ExtResource("5_wovx8")
 texture_hover = ExtResource("6_7anb1")
 
-[node name="Settings" type="TextureButton" parent="HBoxContainer"]
+[node name="Settings" type="TextureButton" parent="Sprite2D/Button container"]
 layout_mode = 2
 texture_normal = ExtResource("7_iefpo")
 texture_hover = ExtResource("8_xbk62")
 
-[node name="Close" type="TextureButton" parent="HBoxContainer"]
+[node name="Close" type="TextureButton" parent="Sprite2D/Button container"]
 layout_mode = 2
 texture_normal = ExtResource("9_qgubj")
 texture_pressed = ExtResource("10_sqv43")
@@ -76,7 +76,7 @@ script = ExtResource("11_2fvvo")
 [connection signal="input_event" from="Sprite2D/StaticBody2D" to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="Sprite2D/StaticBody2D" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Sprite2D/StaticBody2D" to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="HBoxContainer/Todo" to="." method="_on_todo_pressed"]
-[connection signal="pressed" from="HBoxContainer/Pomodoro" to="." method="_on_pomodoro_pressed"]
-[connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="HBoxContainer/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Sprite2D/Button container/Todo" to="." method="_on_todo_pressed"]
+[connection signal="pressed" from="Sprite2D/Button container/Pomodoro" to="." method="_on_pomodoro_pressed"]
+[connection signal="pressed" from="Sprite2D/Button container/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Sprite2D/Button container/Close" to="." method="_on_close_pressed"]

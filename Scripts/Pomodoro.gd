@@ -1,4 +1,4 @@
-extends Node
+extends Window
 
 @onready var settings
 
@@ -12,8 +12,8 @@ var time: float = 0
 
 var work_time: int 
 var break_time: int 
-@onready var mode = modes.WORK
-enum modes {WORK, BREAK}
+@onready var phase = phases.WORK
+enum phases {WORK, BREAK}
 
 @export var start_sprite_n: Texture2D
 @export var start_sprite_h: Texture2D
@@ -38,12 +38,12 @@ func update_timer():
 
 	timer.text = str(hour, ":", minutes, ":", sec)
 
-func set_mode(new_mode):
-	mode = new_mode
+func set_phase(new_phase):
+	phase = new_phase
 
 	toggle_timer(false)
 
-	if mode == modes.WORK:
+	if phase == phases.WORK:
 		time = work_time
 		win_sprite.texture = work_texture
 	else:
@@ -52,12 +52,14 @@ func set_mode(new_mode):
 
 	update_timer()
 
+func switch_phase():
+	visible = true
+	show()
 
-func switch_mode():
-	if mode == modes.WORK:
-		set_mode(modes.BREAK)
+	if phase == phases.WORK:
+		set_phase(phases.BREAK)
 	else:
-		set_mode(modes.WORK)
+		set_phase(phases.WORK)
 
 func toggle_timer(on: bool):
 	if on:
@@ -69,14 +71,18 @@ func toggle_timer(on: bool):
 		start.texture_hover = start_sprite_h
 		timer_active = false	
 
+func reset_time_settings():
+	work_time = settings.player_prefs["work_time"] * 60
+	break_time = settings.player_prefs["break_time"] * 60
+
 
 func _ready():
 	await get_tree().process_frame
 	settings = $"../Settings"
-	work_time = settings.player_prefs["work_time"]
-	break_time = settings.player_prefs["break_time"]
-	time = work_time
-	set_mode(modes.WORK)
+	settings.work_time_input.text_submitted.connect(_on_time_settings_updated)
+	settings.break_time_input.text_submitted.connect(_on_time_settings_updated)
+	reset_time_settings()
+	set_phase(phases.WORK)
 
 func _process(delta):
 	if not timer_active:
@@ -86,12 +92,12 @@ func _process(delta):
 	update_timer()
 
 	if timer.text == "00:00:00":
-		switch_mode()
+		switch_phase()
 
 func _on_play_pressed():
 	if not timer_active:
 		toggle_timer(true)
-		if mode == modes.WORK:
+		if phase == phases.WORK:
 			work_start.emit()
 		else:
 			break_start.emit()
@@ -99,10 +105,14 @@ func _on_play_pressed():
 		toggle_timer(false)
 
 func _on_skip_pressed():
-	if timer_active:
-		switch_mode()
+	switch_phase()
 
 func _on_visibility_changed():
-	work_time = settings.player_prefs["work_time"] * 60
-	break_time = settings.player_prefs["break_time"] * 60
-	set_mode(modes.WORK)
+	reset_time_settings()
+	#set_phase(phases.WORK)
+
+func _on_time_settings_updated(_text):
+	reset_time_settings()
+
+	if !timer_active:
+		set_phase(phase)

@@ -1,12 +1,11 @@
 extends Node
 
 @onready var win: Window = get_window()
-@export var companion_button: TextureButton
 @export var todo_button: TextureButton
 @export var pomodoro_button: TextureButton
 @export var settings_button: TextureButton
 @export var close_button: TextureButton
-@export var container: HBoxContainer
+@export var container: VBoxContainer
 @export var click_timer: Timer
 
 var buttons_on: bool = false
