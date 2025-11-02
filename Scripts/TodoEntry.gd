@@ -15,8 +15,11 @@ func _on_check_pressed(on):
 	if on:
 		text_box.text = str("[s]", text, "[/s]")
 		win.check.emit()
+		Sfx.play_audio("check")
 	else:
 		text_box.text = text
 
+
 func _on_delete_button_pressed():
+	Sfx.play_audio("erase_todo")
 	queue_free()

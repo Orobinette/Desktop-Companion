@@ -17,6 +17,7 @@ func add():
 
 	text_input.text = ""
 
+	Sfx.play_audio("add_task")
 
 func _on_add_button_pressed():
 	add()

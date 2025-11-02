@@ -69,3 +69,6 @@ func _on_name_input_text_changed(txt:String):
 	main_win.title = txt
 	player_prefs["name"] = txt
 	save_prefs()
+
+func _on_input_submitted(_txt):
+	Sfx.play_audio("settings_change")

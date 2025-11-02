@@ -15,7 +15,10 @@ run/main_scene="res://Scenes/scn_companion.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 0)
 boot_splash/show_image=false
-config/icon="res://icon.svg"
+
+[autoload]
+
+Sfx="*res://Scenes/scn_sfx.tscn"
 
 [display]
 

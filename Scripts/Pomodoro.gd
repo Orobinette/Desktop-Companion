@@ -98,8 +98,10 @@ func _on_play_pressed():
 	if not timer_active:
 		toggle_timer(true)
 		if phase == phases.WORK:
+			Sfx.play_audio("work_start")
 			work_start.emit()
 		else:
+			Sfx.play_audio("break_start")
 			break_start.emit()
 	else:
 		toggle_timer(false)

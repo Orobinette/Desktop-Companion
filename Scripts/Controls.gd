@@ -68,6 +68,8 @@ func toggle_buttons():
 		container.process_mode = PROCESS_MODE_DISABLED
 		container.visible = false
 
+	Sfx.play_audio("buttons_toggled")
+
 func _on_mouse_entered():
 	mouse_entered = true
 
@@ -86,6 +88,7 @@ func _on_settings_pressed():
 func open_todo():
 	todo_win.visible = true
 	todo_win.show()
+	Sfx.play_audio("open_window")
 
 func close_todo():
 	todo_win.hide()
@@ -93,6 +96,7 @@ func close_todo():
 func open_pomodoro():
 	pomodoro_win.visible = true
 	pomodoro_win.show()
+	Sfx.play_audio("open_window")
 
 func close_pomodoro():
 	pomodoro_win.hide()
@@ -100,6 +104,7 @@ func close_pomodoro():
 func open_settings():
 	settings_win.visible = true
 	settings_win.show()
+	Sfx.play_audio("open_window")
 
 func close_settings():
 	settings_win.hide()

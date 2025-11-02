@@ -135,5 +135,8 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_1vngn")
 caret_blink = true
 
 [connection signal="text_changed" from="Node/Work time/Pomo work time" to="." method="_on_pomo_work_time_text_changed"]
+[connection signal="text_submitted" from="Node/Work time/Pomo work time" to="." method="_on_input_submitted"]
 [connection signal="text_changed" from="Node/Break label/Pomo break time" to="." method="_on_pomo_break_time_text_changed"]
+[connection signal="text_submitted" from="Node/Break label/Pomo break time" to="." method="_on_input_submitted"]
 [connection signal="text_changed" from="Node/Name/Name input" to="." method="_on_name_input_text_changed"]
+[connection signal="text_submitted" from="Node/Name/Name input" to="." method="_on_input_submitted"]
