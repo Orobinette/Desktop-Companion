@@ -5,6 +5,8 @@ extends Node
 
 var todo_entry_path = preload("res://Scenes/scn_todo_entry.tscn")
 
+signal check
+
 func add():
 	if text_input.text.length() == 0:
 		return

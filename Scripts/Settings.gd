@@ -3,6 +3,7 @@ extends Node
 var save_file_name: String = "player_prefs"
 
 @onready var main_win = $'..'.get_window()
+@onready var dialogue_manager = $'../Dialogue manager'
 
 @export var name_input: LineEdit
 @export var work_time_input: LineEdit
@@ -26,7 +27,6 @@ func _ready():
 	work_time_input.text = str(player_prefs["work_time"])
 	break_time_input.text = str(player_prefs["break_time"])
 	main_win.title = name_input.text
-
 
 func save_prefs():
 	var save_file = FileAccess.open(save_file_name, FileAccess.WRITE)

@@ -22,18 +22,21 @@ enum modes {WORK, BREAK}
 @export var work_texture: Texture2D
 @export var break_texture: Texture2D
 
+signal work_start
+signal break_start
+
 func update_timer():
 	var hour = int(time/60/60)
-	var min = int(time/60 - hour * 3600)
-	var sec = int(time - hour * 3600 - min * 60)
+	var minutes = int(time/60 - hour * 3600)
+	var sec = int(time - hour * 3600 - minutes * 60)
 	if hour < 10:
 		hour = str("0", hour)
-	if min < 10:
-		min = str("0", min)
+	if minutes < 10:
+		minutes = str("0", minutes)
 	if sec < 10:
 		sec = str("0", sec)
 
-	timer.text = str(hour, ":", min, ":", sec)
+	timer.text = str(hour, ":", minutes, ":", sec)
 
 func set_mode(new_mode):
 	mode = new_mode
@@ -88,6 +91,10 @@ func _process(delta):
 func _on_play_pressed():
 	if not timer_active:
 		toggle_timer(true)
+		if mode == modes.WORK:
+			work_start.emit()
+		else:
+			break_start.emit()
 	else:
 		toggle_timer(false)
 

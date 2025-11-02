@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6c2nw8pk2ivf"]
+[gd_scene load_steps=13 format=3 uid="uid://b6c2nw8pk2ivf"]
 
 [ext_resource type="Script" path="res://Scripts/Controls.gd" id="1_gfw5g"]
 [ext_resource type="Texture2D" uid="uid://crs52u6mkfowh" path="res://Sprites/spr_body_builder.png" id="2_vkx8g"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c4shtjoje11b3" path="res://Sprites/spr_button_settings_hover.png" id="8_xbk62"]
 [ext_resource type="Texture2D" uid="uid://xkv0k6uax2lq" path="res://Sprites/spr_button_close_normal.png" id="9_qgubj"]
 [ext_resource type="Texture2D" uid="uid://cp6xitt5cmacg" path="res://Sprites/spr_button_close_hover.png" id="10_sqv43"]
+[ext_resource type="Script" path="res://Scripts/DialogueManager.gd" id="11_2fvvo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vy3q"]
 size = Vector2(102, 77)
@@ -24,7 +25,7 @@ container = NodePath("HBoxContainer")
 click_timer = NodePath("Click timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 25)
+position = Vector2(86, 25)
 texture = ExtResource("2_vkx8g")
 centered = false
 
@@ -38,7 +39,8 @@ shape = SubResource("RectangleShape2D_1vy3q")
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 process_mode = 4
 visible = false
-offset_right = 102.0
+offset_left = 86.0
+offset_right = 188.0
 offset_bottom = 23.0
 theme_override_constants/separation = 0
 alignment = 1
@@ -67,6 +69,9 @@ texture_hover = ExtResource("10_sqv43")
 [node name="Click timer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
+
+[node name="Dialogue manager" type="Node" parent="."]
+script = ExtResource("11_2fvvo")
 
 [connection signal="pressed" from="HBoxContainer/Todo" to="." method="_on_todo_pressed"]
 [connection signal="pressed" from="HBoxContainer/Pomodoro" to="." method="_on_pomodoro_pressed"]

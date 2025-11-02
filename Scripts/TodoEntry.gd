@@ -1,5 +1,7 @@
 extends Node
 
+@onready var win = $"../../.."
+
 @export var check: CheckBox
 @export var text_box: RichTextLabel
 @export var delete: TextureButton
@@ -12,6 +14,7 @@ func _ready():
 func _on_check_pressed(on):
 	if on:
 		text_box.text = str("[s]", text, "[/s]")
+		win.check.emit()
 	else:
 		text_box.text = text
 
