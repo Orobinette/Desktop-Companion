@@ -2,27 +2,31 @@ extends Node
 
 var save_file_name: String = "player_prefs"
 
+@onready var main_win = $'..'.get_window()
+
+@export var name_input: LineEdit
 @export var work_time_input: LineEdit
 @export var break_time_input: LineEdit
 
 var default_prefs = {
+	"version" = 0.0,
+	"name" = "Chad",
 	"work_time" = 25,
-	"break_time" = 5
+	"break_time" = 5,
 }
-var player_prefs = {
-	"work_time" = 0,
-	"break_time" = 0
-}
-
-var work_time: int = 25
-var break_time: int = 5
+var player_prefs = {}
 
 func _init():
 	load_prefs()
+	if !player_prefs.has("version") or default_prefs["version"] != player_prefs.version:
+		update_save_data()
 
 func _ready():
-	work_time_input.text = str(work_time)
-	break_time_input.text = str(break_time)
+	name_input.text = str(player_prefs["name"])
+	work_time_input.text = str(player_prefs["work_time"])
+	break_time_input.text = str(player_prefs["break_time"])
+	main_win.title = name_input.text
+
 
 func save_prefs():
 	var save_file = FileAccess.open(save_file_name, FileAccess.WRITE)
@@ -49,8 +53,19 @@ func load_default_prefs():
 	player_prefs = default_prefs
 	save_prefs()
 
+func update_save_data():
+	player_prefs.merge(default_prefs, true)
+	save_prefs()
+
 func _on_pomo_work_time_text_changed(new_text:String):
 	player_prefs["work_time"] = int(new_text)
+	save_prefs()
 
 func _on_pomo_break_time_text_changed(new_text:String):
 	player_prefs["break_time"] = int(new_text)
+	save_prefs()
+
+func _on_name_input_text_changed(txt:String):
+	main_win.title = txt
+	player_prefs["name"] = txt
+	save_prefs()
