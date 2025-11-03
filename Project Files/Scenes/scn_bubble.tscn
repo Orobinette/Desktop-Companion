@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqjnbmdqctseo"]
+
+[ext_resource type="Texture2D" uid="uid://wbqfngkb0pyu" path="res://Sprites/spr_dialogue.png" id="1_7mqbn"]
+[ext_resource type="Script" path="res://Scripts/DialogueBox.gd" id="2_uqslk"]
+[ext_resource type="Theme" uid="uid://dynkd3lqiuty3" path="res://fnt_small_theme.tres" id="3_cj5jf"]
+
+[node name="Bubble" type="Sprite2D" node_paths=PackedStringArray("timer", "text")]
+texture = ExtResource("1_7mqbn")
+centered = false
+script = ExtResource("2_uqslk")
+timer = NodePath("Timer")
+text = NodePath("Text")
+
+[node name="Text" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 79.0
+offset_bottom = 28.0
+theme = ExtResource("3_cj5jf")
+theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_constants/line_separation = 1
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 4
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

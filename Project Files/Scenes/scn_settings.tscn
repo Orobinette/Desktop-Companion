@@ -1,0 +1,142 @@
+[gd_scene load_steps=13 format=3 uid="uid://bq86crgbs36xi"]
+
+[ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_4t2lq"]
+[ext_resource type="Texture2D" uid="uid://bfma6jn5te17w" path="res://Sprites/spr_menu_settings.png" id="1_nlh03"]
+[ext_resource type="Theme" uid="uid://batwdv4faqriv" path="res://fnt_large_theme.tres" id="2_ihjxs"]
+[ext_resource type="Theme" uid="uid://dynkd3lqiuty3" path="res://fnt_small_theme.tres" id="3_l67jg"]
+[ext_resource type="Texture2D" uid="uid://d0obvyvc4a1de" path="res://Sprites/spr_inp_time.png" id="5_vqaoj"]
+[ext_resource type="Texture2D" uid="uid://hgi4agm3himq" path="res://Sprites/spr_inp_name.png" id="6_0dmmg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sj1my"]
+texture = ExtResource("5_vqaoj")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6f2rh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qkx27"]
+texture = ExtResource("5_vqaoj")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unknf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w2eab"]
+texture = ExtResource("6_0dmmg")
+texture_margin_left = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1vngn"]
+
+[node name="Settings" type="Window" node_paths=PackedStringArray("name_input", "work_time_input", "break_time_input")]
+position = Vector2i(0, 36)
+size = Vector2i(270, 261)
+content_scale_size = Vector2i(90, 87)
+content_scale_mode = 2
+content_scale_aspect = 1
+script = ExtResource("1_4t2lq")
+name_input = NodePath("Node/Name/Name input")
+work_time_input = NodePath("Node/Work time/Pomo work time")
+break_time_input = NodePath("Node/Break label/Pomo break time")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_nlh03")
+centered = false
+
+[node name="Title" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 70.0
+offset_bottom = 35.0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("2_ihjxs")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Settings"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Node" type="Node2D" parent="."]
+position = Vector2(17, 22)
+
+[node name="Work time" type="RichTextLabel" parent="Node"]
+clip_contents = false
+offset_top = 30.0
+offset_right = 34.0
+offset_bottom = 36.0
+theme = ExtResource("3_l67jg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Work time"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Pomo work time" type="LineEdit" parent="Node/Work time"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = -2.0
+offset_right = 57.0
+offset_bottom = 8.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_l67jg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_sj1my")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6f2rh")
+alignment = 1
+max_length = 2
+virtual_keyboard_type = 2
+
+[node name="Break label" type="RichTextLabel" parent="Node"]
+clip_contents = false
+offset_top = 41.0
+offset_right = 38.0
+offset_bottom = 47.0
+theme = ExtResource("3_l67jg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Break time"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Pomo break time" type="LineEdit" parent="Node/Break label"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = -2.0
+offset_right = 57.0
+offset_bottom = 8.0
+theme = ExtResource("3_l67jg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_qkx27")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_unknf")
+alignment = 1
+max_length = 2
+virtual_keyboard_type = 2
+caret_blink = true
+
+[node name="Name" type="RichTextLabel" parent="Node"]
+clip_contents = false
+offset_top = 18.0
+offset_right = 16.0
+offset_bottom = 24.0
+theme = ExtResource("3_l67jg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Name"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Name input" type="LineEdit" parent="Node/Name"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = -2.0
+offset_right = 57.0
+offset_bottom = 8.0
+theme = ExtResource("3_l67jg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_w2eab")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1vngn")
+caret_blink = true
+
+[connection signal="text_changed" from="Node/Work time/Pomo work time" to="." method="_on_pomo_work_time_text_changed"]
+[connection signal="text_submitted" from="Node/Work time/Pomo work time" to="." method="_on_input_submitted"]
+[connection signal="text_changed" from="Node/Break label/Pomo break time" to="." method="_on_pomo_break_time_text_changed"]
+[connection signal="text_submitted" from="Node/Break label/Pomo break time" to="." method="_on_input_submitted"]
+[connection signal="text_changed" from="Node/Name/Name input" to="." method="_on_name_input_text_changed"]
+[connection signal="text_submitted" from="Node/Name/Name input" to="." method="_on_input_submitted"]
