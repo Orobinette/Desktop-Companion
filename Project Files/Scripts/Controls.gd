@@ -1,6 +1,7 @@
 extends Node
 
 @onready var win: Window = get_window()
+@export var anim: AnimatedSprite2D
 @export var todo_button: TextureButton
 @export var pomodoro_button: TextureButton
 @export var settings_button: TextureButton
@@ -51,12 +52,15 @@ func _process(_delta):
 		offset = win.position.x - DisplayServer.mouse_get_position().x
 		click_timer.start(0.1)
 	elif Input.is_action_just_released("interact") and !click_timer.is_stopped(): # Left Click
-		print("click")
+		click_animation()
 	if Input.is_action_pressed("interact"):# Left Drag
 		win.position.x = DisplayServer.mouse_get_position().x + offset
 	
 	if Input.is_action_just_pressed("open_quick_menu"): # Right click
 		toggle_buttons()
+
+func click_animation():
+	anim.play(anim.sprite_frames.get_animation_names()[randi_range(0, anim.sprite_frames.get_animation_names().size() - 1)])
 
 func toggle_buttons():
 	buttons_on = !buttons_on
@@ -69,21 +73,6 @@ func toggle_buttons():
 		container.visible = false
 
 	Sfx.play_audio("buttons_toggled")
-
-func _on_mouse_entered():
-	mouse_entered = true
-
-func _on_mouse_exited():
-	mouse_entered = false
-
-func _on_todo_pressed():
-	open_todo()
-
-func _on_pomodoro_pressed():
-	open_pomodoro()
-
-func _on_settings_pressed():
-	open_settings()
 
 func open_todo():
 	todo_win.visible = true
@@ -108,6 +97,21 @@ func open_settings():
 
 func close_settings():
 	settings_win.hide()
+
+func _on_mouse_entered():
+	mouse_entered = true
+
+func _on_mouse_exited():
+	mouse_entered = false
+
+func _on_todo_pressed():
+	open_todo()
+
+func _on_pomodoro_pressed():
+	open_pomodoro()
+
+func _on_settings_pressed():
+	open_settings()
 
 func _on_close_pressed():
 	get_tree().quit()
