@@ -58,8 +58,10 @@ func switch_phase():
 
 	if phase == phases.WORK:
 		set_phase(phases.BREAK)
+		Sfx.play_audio("break_start")
 	else:
 		set_phase(phases.WORK)
+		Sfx.play_audio("work_start")
 
 func toggle_timer(on: bool):
 	if on:
@@ -93,18 +95,21 @@ func _process(delta):
 
 	if timer.text == "00:00:00":
 		switch_phase()
+		request_attention()
+		popup()
+		set_mode(MODE_WINDOWED)
 
 func _on_play_pressed():
 	if not timer_active:
 		toggle_timer(true)
 		if phase == phases.WORK:
-			Sfx.play_audio("work_start")
 			work_start.emit()
 		else:
-			Sfx.play_audio("break_start")
 			break_start.emit()
 	else:
 		toggle_timer(false)
+	
+	Sfx.play_audio("settings_change")
 
 func _on_skip_pressed():
 	switch_phase()
