@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpaamw83y2tut"]
+
+[ext_resource type="Script" path="res://Scripts/SliderPuzzle.gd" id="1_h3p4e"]
+[ext_resource type="Texture2D" uid="uid://ba1x1urk3440t" path="res://Sprites/spr_slider_panel.png" id="1_jkbkf"]
+
+[node name="Slider puzzle" type="Window"]
+position = Vector2i(10, 36)
+size = Vector2i(186, 198)
+content_scale_size = Vector2i(62, 66)
+content_scale_mode = 2
+content_scale_aspect = 3
+content_scale_stretch = 1
+script = ExtResource("1_h3p4e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jkbkf")
+centered = false
