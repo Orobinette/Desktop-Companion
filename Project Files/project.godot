@@ -24,13 +24,13 @@ Sfx="*res://Scenes/scn_sfx.tscn"
 
 [display]
 
-window/size/viewport_width=182
+window/size/viewport_width=204
 window/size/viewport_height=92
 window/size/resizable=false
 window/size/borderless=true
 window/size/always_on_top=true
 window/size/transparent=true
-window/size/window_width_override=364
+window/size/window_width_override=408
 window/size/window_height_override=184
 window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"

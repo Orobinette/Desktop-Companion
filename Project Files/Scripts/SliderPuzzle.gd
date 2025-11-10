@@ -5,23 +5,21 @@ var solved_case: Array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
 var tiles: Array
 var empty_pos: int
 var freeze: bool = true
-var start_pos: Vector2 = Vector2(9, 11)
+var start_pos: Vector2 = Vector2(9, 25)
+var timer:float = 0
+
+@export var time_label: RichTextLabel
 
 var tile_path = preload("res://Scenes/scn_tile.tscn")
-
-func _ready():
-	start()
 
 func start():
 	board = solved_case.duplicate()
 	board.shuffle()
 	await set_tiles()
-	await get_tree().create_timer(1).timeout
 	for i in board.size()-1:
 		if board[i] == 0:
 			swap(i, 15)
 			break
-	await get_tree().create_timer(1).timeout
 
 	check_parity()
 	empty_pos = 15
@@ -54,9 +52,12 @@ func set_tiles():
 		tile.position = start_pos + Vector2(i%4, i/4)*11
 
 
-func _process(_delta):
+func _process(delta):
 	if freeze:
 		return
+
+	timer += delta
+	time_label.text = str("[right]", int(timer), "[/right]")
 
 	if Input.is_action_just_pressed("slider_left"):
 		slider_left()
@@ -75,28 +76,28 @@ func slider_up():
 		return
 
 	swap(empty_pos, empty_pos+4)
-	print_board()
+	Sfx.play_audio("add_task")
 
 func slider_down():
 	if empty_pos <= 3:
 		return
 
 	swap(empty_pos, empty_pos-4)
-	print_board()
+	Sfx.play_audio("add_task")
 
 func slider_right():
 	if empty_pos % 4 == 0:
 		return
 
 	swap(empty_pos, empty_pos-1)
-	print_board()
+	Sfx.play_audio("add_task")
 
 func slider_left():
 	if empty_pos % 4 == 3:
 		return
 
 	swap(empty_pos, empty_pos+1)
-	print_board()
+	Sfx.play_audio("add_task")
 
 func swap(x, y):
 	var temp = board[x]
@@ -121,5 +122,10 @@ func print_board():
 	print(line)
 
 func solve():
-	print("solved")
+	Sfx.play_audio("break_start")
 	freeze = true
+
+func _on_start_pressed():
+	if freeze:
+		start()
+		Sfx.play_audio("settings_change")

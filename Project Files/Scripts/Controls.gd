@@ -4,9 +4,10 @@ extends Node
 @export var anim: AnimatedSprite2D
 @export var todo_button: TextureButton
 @export var pomodoro_button: TextureButton
+@export var slider_button: TextureButton
 @export var settings_button: TextureButton
 @export var close_button: TextureButton
-@export var container: VBoxContainer
+@export var container: Node2D
 @export var click_timer: Timer
 
 var buttons_on: bool = false
@@ -17,9 +18,11 @@ var mouse_entered: bool = false
 var todo_win
 var pomodoro_win
 var settings_win
+var slider_win
 var todo_path = load("res://Scenes/scn_todo.tscn")
 var pomodoro_path = load("res://Scenes/scn_pomodoro_timer.tscn")
 var settings_path = load("res://Scenes/scn_settings.tscn")
+var slider_path = load("res://Scenes/scn_slider_puzzle.tscn")
 
 func _ready():
 	win.position = DisplayServer.screen_get_usable_rect().size - get_viewport().size
@@ -43,6 +46,12 @@ func _ready():
 	add_child(settings_win)
 	close_pomodoro()
 	settings_win.close_requested.connect(close_settings)
+
+	slider_win = slider_path.instantiate()
+	slider_win.visible = false
+	add_child(slider_win)
+	close_pomodoro()
+	slider_win.close_requested.connect(close_slider)
 
 func _process(_delta):
 	if !mouse_entered:
@@ -90,6 +99,14 @@ func open_pomodoro():
 func close_pomodoro():
 	pomodoro_win.hide()
 
+func open_slider():
+	slider_win.visible = true
+	slider_win.show()
+	Sfx.play_audio("open_window")
+
+func close_slider():
+	slider_win.hide()
+
 func open_settings():
 	settings_win.visible = true
 	settings_win.show()
@@ -109,6 +126,9 @@ func _on_todo_pressed():
 
 func _on_pomodoro_pressed():
 	open_pomodoro()
+
+func _on_slider_pressed():
+	open_slider()
 
 func _on_settings_pressed():
 	open_settings()

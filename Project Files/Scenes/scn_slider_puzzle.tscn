@@ -1,17 +1,122 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpaamw83y2tut"]
+[gd_scene load_steps=18 format=3 uid="uid://dpaamw83y2tut"]
 
 [ext_resource type="Script" path="res://Scripts/SliderPuzzle.gd" id="1_h3p4e"]
 [ext_resource type="Texture2D" uid="uid://ba1x1urk3440t" path="res://Sprites/spr_slider_panel.png" id="1_jkbkf"]
+[ext_resource type="Texture2D" uid="uid://bq4thop1rqt2p" path="res://Sprites/spr_button_slider_start_n.png" id="3_c0cvk"]
+[ext_resource type="Texture2D" uid="uid://fr68gpwsl6a2" path="res://Sprites/spr_button_slider_start_h.png" id="4_caadn"]
+[ext_resource type="Texture2D" uid="uid://kd48q8k3ojkl" path="res://Sprites/spr_slider_timer.png" id="5_imomi"]
+[ext_resource type="Theme" uid="uid://dynkd3lqiuty3" path="res://fnt_small_theme.tres" id="6_8f0tn"]
+[ext_resource type="Texture2D" uid="uid://bbc6sp82nkvlh" path="res://Art/Anim/sprsht_confetti.png" id="7_br23c"]
 
-[node name="Slider puzzle" type="Window"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eo3hf"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_cyq02"]
+_data = [Vector2(0.744828, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.450549), -7.17034, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1jtlw"]
+curve = SubResource("Curve_cyq02")
+
+[sub_resource type="Gradient" id="Gradient_3xbse"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.34188, 0.700855)
+colors = PackedColorArray(0.470588, 0.447059, 0.85098, 1, 1, 0.764706, 0.4, 1, 0.8, 0.341176, 0.360784, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o5q0a"]
+gradient = SubResource("Gradient_3xbse")
+
+[sub_resource type="Curve" id="Curve_t8hog"]
+max_value = 100.0
+_data = [Vector2(0, 93.4066), 0.0, 0.0, 0, 0, Vector2(0.322917, 67.033), 0.0, 0.0, 0, 0, Vector2(1, 100), -128.698, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6p8ug"]
+curve = SubResource("Curve_t8hog")
+
+[sub_resource type="Curve" id="Curve_4jdfq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.710345, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.692308), -3.06878, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_isto7"]
+curve = SubResource("Curve_4jdfq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yonsk"]
+particle_flag_disable_z = true
+direction = Vector3(-0.5, -1, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+gravity = Vector3(0, 75, 0)
+linear_accel_min = 10.0
+linear_accel_max = 30.0
+damping_min = 74.0
+damping_max = 78.0
+damping_curve = SubResource("CurveTexture_6p8ug")
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_isto7")
+color_initial_ramp = SubResource("GradientTexture1D_o5q0a")
+alpha_curve = SubResource("CurveTexture_1jtlw")
+hue_variation_min = -0.02
+hue_variation_max = 0.02
+anim_speed_min = 2.0
+anim_speed_max = 5.0
+anim_offset_max = 1.0
+
+[node name="Slider puzzle" type="Window" node_paths=PackedStringArray("time_label")]
 position = Vector2i(10, 36)
-size = Vector2i(186, 198)
-content_scale_size = Vector2i(62, 66)
+size = Vector2i(186, 240)
+content_scale_size = Vector2i(62, 80)
 content_scale_mode = 2
 content_scale_aspect = 3
 content_scale_stretch = 1
 script = ExtResource("1_h3p4e")
+time_label = NodePath("RichTextLabel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jkbkf")
 centered = false
+
+[node name="Start" type="TextureButton" parent="."]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 48.0
+offset_bottom = 46.0
+texture_normal = ExtResource("3_c0cvk")
+texture_hover = ExtResource("4_caadn")
+
+[node name="Timer box" type="Sprite2D" parent="."]
+position = Vector2(26, 6)
+texture = ExtResource("5_imomi")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 23.0
+offset_top = 10.0
+offset_right = 52.0
+offset_bottom = 24.0
+theme = ExtResource("6_8f0tn")
+theme_override_colors/default_color = Color(0.498039, 0.705882, 0.741176, 1)
+bbcode_enabled = true
+text = "[right]0[/right]"
+fit_content = true
+scroll_active = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_eo3hf")
+position = Vector2(62, 80)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_yonsk")
+texture = ExtResource("7_br23c")
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.9
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

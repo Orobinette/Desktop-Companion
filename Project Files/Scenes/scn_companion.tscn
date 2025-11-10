@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6c2nw8pk2ivf"]
+[gd_scene load_steps=15 format=3 uid="uid://b6c2nw8pk2ivf"]
 
 [ext_resource type="Script" path="res://Scripts/Controls.gd" id="1_gfw5g"]
 [ext_resource type="SpriteFrames" uid="uid://3x27hg6r1pjq" path="res://Art/Anim/sprfr_click_animations.tres" id="2_mxi5m"]
@@ -9,18 +9,21 @@
 [ext_resource type="Texture2D" uid="uid://bgkg2ojs25b24" path="res://Sprites/spr_button_settings_normal.png" id="7_iefpo"]
 [ext_resource type="Texture2D" uid="uid://c4shtjoje11b3" path="res://Sprites/spr_button_settings_hover.png" id="8_xbk62"]
 [ext_resource type="Texture2D" uid="uid://xkv0k6uax2lq" path="res://Sprites/spr_button_close_normal.png" id="9_qgubj"]
+[ext_resource type="Texture2D" uid="uid://citp265toar61" path="res://Sprites/spr_button_slider.png" id="9_s5m6o"]
+[ext_resource type="Texture2D" uid="uid://cm8dxi0x5mi53" path="res://Sprites/spr_button_slider_hover.png" id="10_sb57e"]
 [ext_resource type="Texture2D" uid="uid://cp6xitt5cmacg" path="res://Sprites/spr_button_close_hover.png" id="10_sqv43"]
 [ext_resource type="Script" path="res://Scripts/DialogueManager.gd" id="11_2fvvo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vy3q"]
 size = Vector2(102, 77)
 
-[node name="Companion" type="Node" node_paths=PackedStringArray("anim", "todo_button", "pomodoro_button", "settings_button", "close_button", "container", "click_timer")]
+[node name="Companion" type="Node" node_paths=PackedStringArray("anim", "todo_button", "pomodoro_button", "slider_button", "settings_button", "close_button", "container", "click_timer")]
 script = ExtResource("1_gfw5g")
 anim = NodePath("Animated sprite")
-todo_button = NodePath("Animated sprite/Button container/Todo")
-pomodoro_button = NodePath("Animated sprite/Button container/Pomodoro")
-settings_button = NodePath("Animated sprite/Button container/Settings")
+todo_button = NodePath("Animated sprite/Button container/Vbox/Todo")
+pomodoro_button = NodePath("Animated sprite/Button container/Vbox/Pomodoro")
+slider_button = NodePath("Animated sprite/Button container/Vbox/Slider")
+settings_button = NodePath("Animated sprite/Button container/Vbox/Settings")
 close_button = NodePath("Animated sprite/Button container/Close")
 container = NodePath("Animated sprite/Button container")
 click_timer = NodePath("Click timer")
@@ -38,35 +41,45 @@ input_pickable = true
 position = Vector2(51, 39)
 shape = SubResource("RectangleShape2D_1vy3q")
 
-[node name="Button container" type="VBoxContainer" parent="Animated sprite"]
+[node name="Button container" type="Node2D" parent="Animated sprite"]
 process_mode = 4
 visible = false
-offset_left = 102.0
-offset_top = -15.0
-offset_right = 125.0
-offset_bottom = 77.0
+position = Vector2(-57, -15)
+
+[node name="Close" type="TextureButton" parent="Animated sprite/Button container"]
+offset_left = 181.0
+offset_top = 69.0
+offset_right = 204.0
+offset_bottom = 92.0
+texture_normal = ExtResource("9_qgubj")
+texture_pressed = ExtResource("10_sqv43")
+texture_hover = ExtResource("10_sqv43")
+
+[node name="Vbox" type="VBoxContainer" parent="Animated sprite/Button container"]
+offset_left = 159.0
+offset_right = 182.0
+offset_bottom = 92.0
 theme_override_constants/separation = 0
 
-[node name="Todo" type="TextureButton" parent="Animated sprite/Button container"]
+[node name="Todo" type="TextureButton" parent="Animated sprite/Button container/Vbox"]
 layout_mode = 2
 texture_normal = ExtResource("3_goy80")
 texture_hover = ExtResource("4_clfu5")
 
-[node name="Pomodoro" type="TextureButton" parent="Animated sprite/Button container"]
+[node name="Pomodoro" type="TextureButton" parent="Animated sprite/Button container/Vbox"]
 layout_mode = 2
 texture_normal = ExtResource("5_wovx8")
 texture_hover = ExtResource("6_7anb1")
 
-[node name="Settings" type="TextureButton" parent="Animated sprite/Button container"]
+[node name="Slider" type="TextureButton" parent="Animated sprite/Button container/Vbox"]
+layout_mode = 2
+texture_normal = ExtResource("9_s5m6o")
+texture_hover = ExtResource("10_sb57e")
+
+[node name="Settings" type="TextureButton" parent="Animated sprite/Button container/Vbox"]
 layout_mode = 2
 texture_normal = ExtResource("7_iefpo")
 texture_hover = ExtResource("8_xbk62")
-
-[node name="Close" type="TextureButton" parent="Animated sprite/Button container"]
-layout_mode = 2
-texture_normal = ExtResource("9_qgubj")
-texture_pressed = ExtResource("10_sqv43")
-texture_hover = ExtResource("10_sqv43")
 
 [node name="Click timer" type="Timer" parent="."]
 wait_time = 0.05
@@ -78,7 +91,8 @@ script = ExtResource("11_2fvvo")
 [connection signal="input_event" from="Animated sprite/StaticBody2D" to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="Animated sprite/StaticBody2D" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Animated sprite/StaticBody2D" to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="Animated sprite/Button container/Todo" to="." method="_on_todo_pressed"]
-[connection signal="pressed" from="Animated sprite/Button container/Pomodoro" to="." method="_on_pomodoro_pressed"]
-[connection signal="pressed" from="Animated sprite/Button container/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Animated sprite/Button container/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Animated sprite/Button container/Vbox/Todo" to="." method="_on_todo_pressed"]
+[connection signal="pressed" from="Animated sprite/Button container/Vbox/Pomodoro" to="." method="_on_pomodoro_pressed"]
+[connection signal="pressed" from="Animated sprite/Button container/Vbox/Slider" to="." method="_on_slider_pressed"]
+[connection signal="pressed" from="Animated sprite/Button container/Vbox/Settings" to="." method="_on_settings_pressed"]
